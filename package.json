@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "mini-game for Andrey to test my skills on JS",
   "main": "index.js",
+  "repository": "https://github.com/GlaDos28/ForAndrey.git",
   "scripts": {
-    "test": "test",
-    "coverage": "istanbul cover ./"
+    "test": "mocha",
+    "coverage": "istanbul cover ./",
+    "docs": "jsdoc ./"
   },
   "keywords": [
     "Andrey",
