@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha",
     "coverage": "istanbul cover ./",
-    "docs": "jsdoc ./"
+    "docs": "jsdoc -c jsdoc-conf.json ./"
   },
   "keywords": [
     "Andrey",

@@ -11,42 +11,62 @@
 
 "use strict";
 
-const AnimatedModelDescriptor = require("./AnimatedModelDescriptor");
-
 /**
- * @description graphical object that represents an animated model. Consists of animated model descriptor and current model state attributes
+ * @class
+ * @classdesc graphical object that represents an animated model. Consists of animated model descriptor and current model state attributes
  *
- * @property {AnimatedModelDescriptor} descriptor that defines a model (its sprites)
- * @property {string} curStateName name of a current state
- * @property {int} curSpriteIndex index in tha array of a current sprite that are displayed
- * @property {int} spriteTimeLeft current time left before switching an active sprite
+ * @property {AnimatedModelDescriptor} descriptor     an object that defines a model (its sprites)
+ * @property {Sprite}                  curSprite      current active sprite that displays via draw calls
+ * @property {double}                  spriteTimeLeft current time left before switching an active sprite
  */
 class AnimatedModel {
     constructor(descriptor) {
         this.descriptor     = descriptor;
-        this.curStateName   = this.descriptor.getDefaultStateName();
-        this.curSpriteIndex = 0;
+        this.curSprite      = this.descriptor.getStateFirstSprite(this.descriptor.getDefaultStateName());
         this.spriteLeftTime = 0;
+
+        this.__initSpriteTime__();
     }
 
-    initSpriteTime() {
-        while (this.spriteLeftTime === 0) {
-            this.curSpriteIndex += 1;
+    getDescriptor() {
+        return this.descriptor;
+    }
 
-            if (this.curSpriteIndex < this.descriptor.getStateSpriteNum(this.curStateName)) {
-                break;
-            }
-
-            this.curStateName = this.descriptor.getSprite(this.curStateName, this.curSpriteIndex);
-        }
-
-        if (this.spriteLeftTime === 0) {
-
-        }
+    switchToState(stateName) {
+        this.curSprite = this.descriptor.getStateFirstSprite(stateName);
+        this.__initSpriteTime__();
     }
 
     draw(delta) {
+        this.__tic__(delta);
 
+        /* TODO */
+    }
+
+    /* Private methods */
+
+    __goNextSprite__() {
+        this.curSprite = this.curSprite.getNext();
+        this.__initSpriteTime__();
+    }
+
+    __initSpriteTime__() {
+        while (this.curSprite.getTime() <= 0) {
+            this.curSprite = this.curSprite.getNext();
+        }
+
+        this.spriteLeftTime = this.curSprite.getTime();
+    }
+
+    __tic__(delta) {
+        let ticsLeft = delta;
+        this.spriteLeftTime -= ticsLeft;
+
+        while (this.spriteLeftTime <= 0) {
+            ticsLeft = -this.spriteLeftTime;
+            this.__goNextSprite__();
+            this.spriteLeftTime -= ticsLeft;
+        }
     }
 }
 

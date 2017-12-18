@@ -14,7 +14,8 @@
 const Point = require("./Point");
 
 /**
- * @description Rectangular boundbox structure with floating-valued position and width with height attributes
+ * @class
+ * @classdesc Rectangular boundbox structure with floating-valued position and width and height attributes
  *
  * @property {Point}  pos    position attribute
  * @property {double} width  width attribute

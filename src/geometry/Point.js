@@ -12,7 +12,8 @@
 "use strict";
 
 /**
- * @description (2D) Point structure with floating-valued X- and Y-axis coordinates
+ * @class
+ * @classdesc (2D) Point structure with floating-valued X- and Y-axis coordinates
  *
  * @property {double} x X-axis coordinate
  * @property {double} y Y-axis coordinate

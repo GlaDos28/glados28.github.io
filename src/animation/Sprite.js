@@ -1,6 +1,6 @@
 /**
  * ==========================
- * @description animation unit. Consists of an image and displaying time
+ * @description animation unit. Consists of corresponding state name, image, displaying time and next sprite
  * ==========================
  *
  * @author Evgeny Savelyev
@@ -12,15 +12,24 @@
 "use strict";
 
 /**
- * @description structure that stores an image and related displaying interval of this image
+ * @class
+ * @classdesc structure that stores related state name, image and related displaying interval of this image, as well as the link to the following sprite
  *
- * @property {Image} image sprite image
- * @property {int}   time  displaying interval
+ * @property {string} stateName  name of containing this sprite state
+ * @property {Image}  image      sprite image
+ * @property {int}    time       displaying interval
+ * @property {Sprite} nextSprite link to the next sprite (must not be null or undefined)
  */
 class Sprite {
-    constructor(image, time) {
-        this.image = image;
-        this.time  = time;
+    constructor(stateName, image, time, nextSprite) {
+        this.stateName = stateName;
+        this.image     = image;
+        this.time      = time;
+        this.next      = nextSprite;
+    }
+
+    getStateName() {
+        return this.stateName;
     }
 
     getImage() {
@@ -29,6 +38,16 @@ class Sprite {
 
     getTime() {
         return this.time;
+    }
+
+    getNext() {
+        return this.next;
+    }
+
+    /* Package-private methods */
+
+    __setNext__(nextSprite) {
+        this.next = nextSprite;
     }
 }
 

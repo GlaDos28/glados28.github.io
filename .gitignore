@@ -28,9 +28,8 @@ jspm_packages
 .idea
 *.iml
 
-# JSDOC files
-out
-jsdoc
+# JSDOC output
+docs
 
-# coverage files
+# coverage output
 coverage

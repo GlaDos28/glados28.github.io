@@ -1,6 +1,6 @@
 /**
  * ==========================
- * @description Graphical model descriptor that defines animation states (i.e. batches of sprites).
+ * @description Graphical model descriptor that defines animation states (i.e. batch of sprites for each state).
  * ==========================
  *
  * @author Evgeny Savelyev
@@ -12,23 +12,20 @@
 "use strict";
 
 /**
- * @description descriptor of a graphical model with animation. Contains states represented as lists of sprites, for each model state
+ * @class
+ * @classdesc descriptor of a graphical model with animation. Contains states represented as linked lists of sprites
  *
- * @property {map<string, array<Sprite>>} states map { state name : state sprites }
+ * @property {map<string, Sprite>} states map { state name : first state sprite }
  * @property {string} defaultStateName base state that triggers due the initialization of an animated model
  */
 class AnimatedModelDescriptor {
-    constructor(states, defaultStateName) {
-        this.states = states;
-        this.defaultStateName = defaultStateName;
+    constructor(stateFirstSprites, defaultStateName) {
+        this.stateFirstSprites = stateFirstSprites;
+        this.defaultStateName  = defaultStateName;
     }
 
-    getSprite(stateName, spriteIndex) {
-        return this.states[stateName][spriteIndex];
-    }
-
-    getStateSpriteNum(stateName) {
-        return this.states[stateName].size;
+    getStateFirstSprite(stateName) {
+        return this.states[stateName];
     }
 
     getDefaultStateName() {
