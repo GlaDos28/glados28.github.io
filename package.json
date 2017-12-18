@@ -1,0 +1,28 @@
+{
+  "name": "forandrey",
+  "version": "1.0.0",
+  "description": "mini-game for Andrey to test my skills on JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "coverage": "istanbul cover ./"
+  },
+  "keywords": [
+    "Andrey",
+    "test"
+  ],
+  "author": "Evgeny Savelyev",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.13.1",
+    "gulp": "^3.9.1",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "pixi.js": "^4.6.2"
+  }
+}
