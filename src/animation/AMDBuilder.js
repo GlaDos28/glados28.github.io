@@ -50,6 +50,8 @@ class AMDBuilder {
 
         this.curFillStateName = stateName;
         this.lastAddedSprite  = null; /* Nullify the last sprite, because last sprite meaning signifies only within state sprite batch */
+
+        return this;
     }
 
     nextSprite(image, time, spriteId = null, nextSpriteId = null) {
@@ -59,6 +61,7 @@ class AMDBuilder {
         /* Translated into links to the first sprite of a default state, due the building process */
 
         const newSprite = new Sprite(this.curFillStateName, image, time, undefined);
+
         this.sprites.push(newSprite);
 
         if (this.lastAddedSprite) { /* Whether this is not the first sprite in the current state */
@@ -83,6 +86,8 @@ class AMDBuilder {
         /* Note that after setting next sprite of the last added sprite current state remains unharmed */
 
         this.lastAddedSprite.__setNext__(this.spriteIdMap[nextSpriteId]);
+
+        return this;
     }
 
     setDefaultState(stateName) {
@@ -93,6 +98,8 @@ class AMDBuilder {
         }
 
         this.defaultStateName = stateName;
+
+        return this;
     }
 
     build() {
