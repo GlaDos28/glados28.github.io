@@ -5,9 +5,10 @@
   "main": "index.js",
   "repository": "https://github.com/GlaDos28/ForAndrey.git",
   "scripts": {
-    "test": "mocha",
-    "coverage": "istanbul cover ./",
-    "docs": "jsdoc -c jsdoc-conf.json ./"
+    "run"      : "node index.js",
+    "test"     : "mocha",
+    "coverage" : "istanbul cover ./",
+    "docs"     : "jsdoc -c jsdoc-conf.json ./"
   },
   "keywords": [
     "Andrey",

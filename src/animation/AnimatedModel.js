@@ -11,6 +11,8 @@
 
 "use strict";
 
+const LARGE_NUM = 1000000000;
+
 /**
  * @class
  * @classdesc graphical object that represents an animated model. Consists of animated model descriptor and current model state attributes
@@ -21,6 +23,10 @@
  */
 class AnimatedModel {
     constructor(descriptor) {
+        if (typeof descriptor === "undefined" || !descriptor) {
+            throw new Error(`Corrupt animated model descriptor: "${typeof descriptor}"`);
+        }
+
         this.descriptor     = descriptor;
         this.curSprite      = this.descriptor.getStateFirstSprite(this.descriptor.getDefaultStateName());
         this.spriteLeftTime = 0;
@@ -37,10 +43,11 @@ class AnimatedModel {
         this.__initSpriteTime__();
     }
 
-    draw(delta) {
+    draw(app, point, delta) {
         this.__tic__(delta);
-
-        /* TODO */
+        this.curSprite.getPixiSprite().x = point.getX();
+        this.curSprite.getPixiSprite().y = point.getY();
+        app.stage.addChild(this.curSprite.getPixiSprite()); /* FIXME this is not what needed */
     }
 
     /* Private methods */
@@ -51,11 +58,15 @@ class AnimatedModel {
     }
 
     __initSpriteTime__() {
-        while (this.curSprite.getTime() <= 0) {
+        while (this.curSprite.getTime() === 0) {
             this.curSprite = this.curSprite.getNext();
         }
 
         this.spriteLeftTime = this.curSprite.getTime();
+
+        if (this.spriteLeftTime === -1) {
+            this.spriteLeftTime = LARGE_NUM;
+        }
     }
 
     __tic__(delta) {

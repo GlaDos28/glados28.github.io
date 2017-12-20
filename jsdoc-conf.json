@@ -14,7 +14,8 @@
       "test",
       "resources",
       "out",
-      "coverage"
+      "coverage",
+      "smoothie-master"
     ],
 
     "includePattern": ".+\\.js(doc|x)?$",

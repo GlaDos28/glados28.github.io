@@ -3,7 +3,7 @@
  * @description scene as container of scene objects and main action area in the game
  * ==========================
  *
- * @author Evgeny Savelyev
+ * @author  Evgeny Savelyev
  * @since   19.12.17
  * @version 1.0.0
  * @licence See the LICENCE file in the project root.
@@ -46,9 +46,9 @@ class Scene {
         return this.objectIdMap[objectId];
     }
 
-    draw(delta) {
+    draw(app, delta) {
         for (const object of this.objects) {
-            object.draw(delta);
+            object.draw(app, delta);
         }
     }
 

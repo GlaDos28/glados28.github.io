@@ -3,7 +3,7 @@
  * @description scene object descriptor (a.k.a actor)
  * ==========================
  *
- * @author Evgeny Savelyev
+ * @author  Evgeny Savelyev
  * @since   19.12.17
  * @version 1.0.0
  * @licence See the LICENCE file in the project root.
@@ -18,12 +18,14 @@
  * @property {Actor} baseActor parent actor from which this one inherits
  * @property {AnimatedModelDescriptor} animatedModelDescriptor actor animation info
  * @property {RectBox} box bounding box with rectangular shape
+ * @property {function} processFunc void function(obj, delta) that calls when the corresponding object processes
  */
 class Actor {
-    constructor(baseActor = null, animatedModelDescriptor, rectBox) {
-        this.baseActor = baseActor; /* TODO add actor attributes; use base actor */
+    constructor(animatedModelDescriptor, rectBox, processFunc = () => {}, baseActor = null) {
+        this.baseActor               = baseActor; /* TODO add actor attributes; use base actor */
         this.animatedModelDescriptor = animatedModelDescriptor;
-        this.box = rectBox;
+        this.box                     = rectBox;
+        this.processFunc             = processFunc;
     }
 
     getAnimatedModelDescriptor() {
@@ -36,6 +38,10 @@ class Actor {
 
     getBox() {
         return this.box;
+    }
+
+    getProcessFunction() {
+        return this.processFunc;
     }
 }
 

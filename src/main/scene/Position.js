@@ -3,7 +3,7 @@
  * @description object (2D) position. Differs from (2D) Point by its non-immutability.
  * ==========================
  *
- * @author Evgeny Savelyev
+ * @author  Evgeny Savelyev
  * @since   19.12.17
  * @version 1.0.0
  * @licence See the LICENCE file in the project root.

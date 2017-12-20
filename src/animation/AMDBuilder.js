@@ -54,13 +54,13 @@ class AMDBuilder {
         return this;
     }
 
-    nextSprite(image, time, spriteId = null, nextSpriteId = null) {
-        this.__nextSpriteValidation__(image, time, spriteId, nextSpriteId);
+    nextSprite(imagePath, time, spriteId = null, nextSpriteId = null) {
+        this.__nextSpriteValidation__(imagePath, time, spriteId, nextSpriteId);
 
         /* Note that all sprite undefined 'next' links (i.e. states' last sprites) will be        */
         /* Translated into links to the first sprite of a default state, due the building process */
 
-        const newSprite = new Sprite(this.curFillStateName, image, time, undefined);
+        const newSprite = new Sprite(this.curFillStateName, imagePath, time, undefined);
 
         this.sprites.push(newSprite);
 
@@ -97,6 +97,10 @@ class AMDBuilder {
             throw new Error(`Corrupt state name "${stateName}". This should be a nonempty string.`);
         }
 
+        if (!this.stateFirstSprites[stateName]) {
+            throw new Error(`Nonexistent state "${stateName}". Create a state by startState() method.`);
+        }
+
         this.defaultStateName = stateName;
 
         return this;
@@ -107,10 +111,6 @@ class AMDBuilder {
 
         if (!this.defaultStateName) {
             throw new Error("Should set a default state before building. Use setDefaultState(stateName).");
-        }
-
-        if (!this.sprites.length <= 0) {
-            throw new Error("Should define at least one state before building. Use startState(stateName) and then add sprites to it with nextSprite(...).");
         }
 
         if (!this.lastAddedSprite) {
@@ -142,10 +142,10 @@ class AMDBuilder {
 
         this.__ensureNotBuilt__();
 
-        /* TODO check image */
+        /* TODO check pixiSprite */
 
-        if (typeof time !== "number" || time < 0) {
-            throw new Error(`Corrupt sprite time "${time}". This should be a non-negative number.`);
+        if (typeof time !== "number" || time < -1) {
+            throw new Error(`Corrupt sprite time "${time}". This should be a number from [-1, inf).`);
         }
 
         if (!this.curFillStateName) {

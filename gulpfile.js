@@ -1,8 +1,10 @@
 "use strict";
 
-const gulp           = require("gulp");
-const { helloWorld } = require("./index");
+const gulp          = require("gulp");
+const { newGame } = require("./index");
 
 gulp.task("run", () => {
-    console.log(helloWorld());
+    newGame();
 });
+
+gulp.task("default", ["run"]);

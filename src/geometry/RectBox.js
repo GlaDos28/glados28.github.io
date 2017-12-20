@@ -3,7 +3,7 @@
  * @description Rectangular boundbox definition.
  * ==========================
  *
- * @author Evgeny Savelyev
+ * @author  Evgeny Savelyev
  * @since   18.12.17
  * @version 1.0.0
  * @licence See the LICENCE file in the project root.

@@ -3,7 +3,7 @@
  * @description Graphical model descriptor that defines animation states (i.e. batch of sprites for each state).
  * ==========================
  *
- * @author Evgeny Savelyev
+ * @author  Evgeny Savelyev
  * @since   18.12.17
  * @version 1.0.0
  * @licence See the LICENCE file in the project root.
@@ -25,7 +25,7 @@ class AnimatedModelDescriptor {
     }
 
     getStateFirstSprite(stateName) {
-        return this.states[stateName];
+        return this.stateFirstSprites[stateName];
     }
 
     getDefaultStateName() {
