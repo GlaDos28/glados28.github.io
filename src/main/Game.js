@@ -11,7 +11,8 @@
 
 "use strict";
 
-const Scene  = require("./scene/Scene");
+const Scene    = require("./scene/Scene");
+const Keyboard = require("./controller/Keyboard");
 
 /**
  * @class
@@ -24,7 +25,7 @@ const Scene  = require("./scene/Scene");
 class Game {
     constructor(pixiApp) {
         this.pixiApp = pixiApp;
-        this.scene   = new Scene();
+        this.scene   = new Scene(this.pixiApp);
         this.started = false;
     }
 
@@ -47,13 +48,19 @@ class Game {
 
         this.started = true;
 
+        /* Flip stage of Y axis to make Y coordinate goes positive with moving up */
+        this.pixiApp.stage.y += this.pixiApp.renderer.height;
+        this.pixiApp.stage.scale.y = -1;
+
         this.pixiApp.ticker.add((delta) => {
             for (let i = 0; i < this.scene.getObjectsNum(); i += 1) {
                 const object = this.scene.getObjectByIndex(i);
 
                 object.process(delta);
-                object.draw(this.pixiApp, delta);
+                object.draw(delta);
             }
+
+            Keyboard.current.__processIteration__();
         });
     }
 }

@@ -2,29 +2,25 @@
 <html>
 <body>
     <h2>Game for Andrey</h2>
-    <button id="starButton" type="button" onclick="startApp()">start!</button>
 
     <script type="text/javascript" src="./smoothie-master/standalone/require.js"></script>
 
     <script>
-        function startApp() {
-            document.getElementById("starButton").style.display = "none";
+        try {
+            /* requires index.js */
+            const { newGame } = require("index");
 
-            try {
-                /* requires index.js */
+            /* start the game */
+            const game = newGame();
 
-                const { newGame } = require("./index");
+            /* adds game app into the window */
+            document.body.appendChild(game.getPixiApp().view);
 
-                /* start the game */
-
-                const game = newGame();
-
-                /* adds game app into the window */
-
-                document.body.appendChild(game.getPixiApp().view);
-            } catch (error) {
-                alert("Error: " + error.message);
-            }
+            /* play background music */
+            const audio = new Audio('resources/mr_sandman.mp3');
+            audio.play();
+        } catch (error) {
+            alert("Error: " + error.message);
         }
     </script>
 </body>

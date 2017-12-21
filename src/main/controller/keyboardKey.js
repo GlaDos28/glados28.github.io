@@ -22,19 +22,17 @@ function keyboardKey(keyCode) {
 
     key.code    = keyCode;
     key.isDown  = false;
-    key.isUp    = true;
     key.press   = undefined;
     key.release = undefined;
 
     //The `downHandler`
     key.downHandler = (event) => {
         if (event.keyCode === key.code) {
-            if (key.isUp && key.press) {
+            if (key.press) {
                 key.press();
             }
 
             key.isDown = true;
-            key.isUp = false;
         }
 
         event.preventDefault();
@@ -48,7 +46,6 @@ function keyboardKey(keyCode) {
             }
 
             key.isDown = false;
-            key.isUp = true;
         }
 
         event.preventDefault();

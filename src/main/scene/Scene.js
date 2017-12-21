@@ -15,13 +15,19 @@
  * @class
  * @classdesc game scene with scene objects. Game action goes here
  *
+ * @property {PIXI.Application} pixiApp pixi.js application reference
  * @property {array<SceneObject>} objects array of scene objects. Any object can have a string ID
  * @property {map<string, SceneObject>} objectIdMap mapping { "object ID" : "object" }
  */
 class Scene {
-    constructor() {
+    constructor(pixiApp) {
+        this.pixiApp     = pixiApp;
         this.objects     = [];
         this.objectIdMap = {};
+    }
+
+    getPixiAppRef() {
+        return this.pixiApp;
     }
 
     addObject(object, objectId = undefined) {
@@ -31,7 +37,7 @@ class Scene {
             this.objectIdMap[objectId] = object;
         }
 
-        object.__setSceneRef__(this);
+        object.__setSceneRef__(this.pixiApp, this);
     }
 
     getObjectsNum() {
@@ -46,9 +52,9 @@ class Scene {
         return this.objectIdMap[objectId];
     }
 
-    draw(app, delta) {
+    draw(delta) {
         for (const object of this.objects) {
-            object.draw(app, delta);
+            object.draw(delta);
         }
     }
 

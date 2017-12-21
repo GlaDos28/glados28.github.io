@@ -36,6 +36,18 @@ class Position {
         return this.point.getY();
     }
 
+    set(newX, newY) {
+        this.point = new Point(newX, newY);
+    }
+
+    setX(newX) {
+        this.point = new Point(newX, this.point.getY());
+    }
+
+    setY(newY) {
+        this.point = new Point(this.point.getX(), newY);
+    }
+
     move(x, y) {
         this.point = this.point.sum(new Point(x, y));
     }

@@ -33,11 +33,11 @@ class RectBox {
     }
 
     getX() {
-        return this.p.getX();
+        return this.pos.getX();
     }
 
     getY() {
-        return this.p.getY();
+        return this.pos.getY();
     }
 
     getWidth() {
@@ -46,6 +46,14 @@ class RectBox {
 
     getHeight() {
         return this.height;
+    }
+
+    getX2() {
+        return this.pos.getX() + this.width;
+    }
+
+    getY2() {
+        return this.pos.getY() + this.height;
     }
 }
 
