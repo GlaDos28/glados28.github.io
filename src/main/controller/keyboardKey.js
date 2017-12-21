@@ -25,7 +25,7 @@ function keyboardKey(keyCode) {
     key.press   = undefined;
     key.release = undefined;
 
-    //The `downHandler`
+    /* The 'downHandler' */
     key.downHandler = (event) => {
         if (event.keyCode === key.code) {
             if (key.press) {
@@ -38,7 +38,7 @@ function keyboardKey(keyCode) {
         event.preventDefault();
     };
 
-    //The `upHandler`
+    /* The 'upHandler' */
     key.upHandler = (event) => {
         if (event.keyCode === key.code) {
             if (key.isDown && key.release) {
@@ -51,7 +51,7 @@ function keyboardKey(keyCode) {
         event.preventDefault();
     };
 
-    //Attach event listeners
+    /* Attach event listeners */
     window.addEventListener("keydown", key.downHandler.bind(key), false);
     window.addEventListener("keyup",   key.upHandler.bind(key), false);
 

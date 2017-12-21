@@ -9,8 +9,8 @@ gulp.task("run", () => {
     newGame();
 });
 
-gulp.task("build", () => browserify({ entries : "./**/*.js" })
-    .transform("babelify", { presets : ["es2015"] })
+gulp.task("build", () => browserify({ entries : "./index.js" })
+    .transform(babelify, { presets : ["es2015"] })
     .bundle()
     .pipe(gulp.src("game.js"))
     .pipe(gulp.dest("built")));
