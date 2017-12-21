@@ -11,7 +11,7 @@
 
 "use strict";
 
-require("./node_modules/pixi.js/dist/pixi");
+require("./node_modules/pixi.js/dist/pixi.js");
 const Game           = require("./src/main/Game");
 const SceneObject    = require("./src/main/scene/SceneObject");
 const Point          = require("./src/geometry/Point");
